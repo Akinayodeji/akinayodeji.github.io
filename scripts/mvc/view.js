@@ -2,6 +2,7 @@
 var appView = function(model, elements) {
     this._model = model;
     this._elements = elements;
+    this.sortBy = new EventListener();
     this.offlineNote = new EventListener();
     this.onlineNote = new EventListener();
 
@@ -14,7 +15,7 @@ var appView = function(model, elements) {
         _this.retrieveAndDisplay( feedback );
     });
     
-    this._model.savedData.attach(function ( sender, feedback) {
+    this._model.cachedData.attach(function ( sender, feedback) {
         _this.retrieveAndDisplay( feedback );
     });
     
@@ -27,7 +28,11 @@ var appView = function(model, elements) {
          this.onlineNote.attach(function(){
                 _this.networkFeedback("#76ff03", "Online mode")
             });
-
+        //trigger events
+        document.querySelector(this._elements.select).addEventListener("change", function(){
+            _this.showLoader();
+            _this.sortBy.notify({"sortBy": this.value});
+        });
 
 }
 
@@ -53,7 +58,7 @@ appView.prototype = {
             this.displayData( feedback ) ;
             this.hideLoader();
         }else{
-            this.hideLoader();
+            //this.hideLoader();
             document.querySelector(this._elements.shell).innerHTML = 
             `<div class='error-msg'>
               Couldn't retrieve data at this time.. check your network conection and try again 
@@ -66,8 +71,10 @@ appView.prototype = {
         var scriptTemplate = document.querySelector(this._elements.scriptTemplate).innerHTML;
         var compiledTemplate = Handlebars.compile(scriptTemplate);
         var generatedHtml = compiledTemplate( data );
+        var sortBy = document.querySelector(this._elements.select).value;
 
         var template = document.querySelector(this._elements.temp);
+        document.querySelector(this._elements.heading).innerHTML = sortBy;
         template.innerHTML = generatedHtml;
     }
 }

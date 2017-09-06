@@ -3,32 +3,30 @@ var appController = function(model, view){
     this.view = view;
     _this = this;
    
-    window.addEventListener('load', function() {
-      
-        if(navigator.onLine)
-        {
-         _this.view.onlineNote.notify();
-           _this.newData();
-        }
-        else
-        {
+     this.checkNetWork = navigator.onLine;
+
+     window.addEventListener('load', function() {  
+
+        if(_this.checkNetWork ){
+           _this.view.onlineNote.notify();
+           _this.getData(_this.checkNetWork, "undefined");
+        }else{
            _this.view.offlineNote.notify();
-           _this.savedData();
-           
+           _this.getData(_this.checkNetWork, "undefined");   
         }
+
+     });
+
+     this.view.sortBy.attach(function( sender ,args ){
+         
+         _this.getData(_this.checkNetWork, args );
      });
 
 };
 
 appController.prototype = {
 
-    newData: function () {
-        this.model.getNewData();
-    },
-    savedData: function () {
-        this.model.getSavedData();
-    },
-     
-    
-    
+    getData: function (status, args) {
+        this.model.getNewData( status, args);
+    }
 }

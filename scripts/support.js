@@ -6,6 +6,7 @@
   
    if(el.style.flex === "undefined" || el.style.flexWrap === "undefined"){
         $el(".flex").style.display = "block";
+        
    }else{
        var elem = document.createElement('div'),
           prefix = ['-webkit-box','-moz-box','-ms-flexbox','-webkit-flex', 'flex' ]

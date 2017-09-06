@@ -1,5 +1,5 @@
-var DEFINE_CACHE = 'news-feed-v1.1',
-    RUNTIME_CACHE = 'news-feed-runtime-v1.1';
+var DEFINE_CACHE = 'news-feed-v1.0',
+    RUNTIME_CACHE = 'news-feed-runtime-v1.0';
 
 var filesToCache = [
   '/',
