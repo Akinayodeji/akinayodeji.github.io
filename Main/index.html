@@ -1,0 +1,118 @@
+<!doctype>
+<html lang="en" class="no-js html">
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#304FFE">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="News Feed">
+    <meta name="description" content="A news feed progressive web app powered by news.org api">
+    <meta name="keywords" content="PWA practice" />
+    <meta name="author" content="Akinola Ayodeji" />
+    <!-- icon in the highest resolution we need it for -->
+    <link rel="icon" sizes="512x512" href="images/icons/icon-512.png">
+    <!-- reuse same icon for Safari -->
+    <link rel="apple-touch-icon" href="images/icons/icon1-512.png">
+    <!-- multiple icons for IE -->
+    <meta name="msapplication-square310x310logo" content="images/icons/icon1-512.png">
+    <title>News Feed</title>
+    <link rel="stylesheet" type="text/css" href="font2/ionicons-2.0.1/css/ionicons.min.css">
+     <link async rel="stylesheet" href="styles/normalize.css">
+    <link async rel="stylesheet" href="styles/css.css">
+    <link async rel="stylesheet" href="styles/reset.css">
+    <link rel="manifest"  href="manifest.json">
+</head>
+<body>
+    <header class="header">
+        <div class="clearfix">
+           <div class="to-left">
+               <h3 class="header-text"> <i class="ion-android-list"></i> News Feed</h3>
+           </div>
+           <div class="to-right ">
+               <label class="label">
+                <select class="select" name="sortBy">
+                    <option>Top</option>
+                    <option>Latest</option>
+                </select>
+              </label>
+           </div>
+        </div>
+    </header>
+    <main class="container app-shell">
+        <div class="app-shell-inner shell">
+         <h3 class="heading"></h3>
+         <div class="template flex flex--wrap"> </div>
+         <div class="error-container"></div>
+         <!-- loader container -->
+         <div class="loading">
+            <div class="flex flex--wrap">
+                <div class="col-ms-50  loading-wrapper ">
+                    <span class="loading-0"></span>
+                    <span class="loading-1"></span>
+                    <span class="loading-2"></span>
+                    <span class="loading-3"></span>
+                </div>
+                <div class="col-ms-50  loading-wrapper ">
+                    <span class="loading-0"></span>
+                    <span class="loading-1"></span>
+                    <span class="loading-2"></span>
+                    <span class="loading-3"></span>
+                </div>
+                <div class="col-ms-50  loading-wrapper ">
+                    <span class="loading-0"></span>
+                    <span class="loading-1"></span>
+                    <span class="loading-2"></span>
+                    <span class="loading-3"></span>
+                </div>
+                <div class="col-ms-50  loading-wrapper ">
+                    <span class="loading-0"></span>
+                    <span class="loading-1"></span>
+                    <span class="loading-2"></span>
+                    <span class="loading-3"></span>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="network-mode"></div>
+    </main>
+    <footer class="footer">
+       <p>Made with <i class="ion-heart note-001"></i> by dejavu @techatrek</p>
+       <p class="source-text"> Powered by news.org</p>
+    </footer>
+
+
+     <script id="scriptTemplate" type="x-handlebars-template">
+       
+          {{#each articles}}
+                <div class="col-ms-50 ">
+                    <div class="card news-card">
+                        <a class="news-href " target="_blank" href="{{url}}" noopener>
+                            <div class="news-img-container">
+                                <img src="{{urlToImage}}"></img>
+                            </div>
+                            <div class="news-content">
+                                <p class="news-author">{{author}}</p>
+                                <h3 class="news-title">{{title}}</h3>
+                                <p class="news-desp">{{description}}</p>
+                                <p class="news-source">techcrunch</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+           {{/each}}
+       
+     </script>
+     <script src="scripts/ajax.js" async></script>
+     <script src="scripts/libs/handlebars-v4.0.10.js"></script>
+     <script src="scripts/libs/modernizr-custom.js" async></script>
+     <script src="scripts/mvc/eventListener.js" async></script>
+     <script src="scripts/mvc/model.js" async></script>
+     <script src="scripts/mvc/view.js" async></script>
+     <script src="scripts/mvc/controller.js"></script>
+     <script src="scripts/app.js" async></script>
+     <script src="scripts/support.js" async></script>
+    
+</body>
+
+</html>

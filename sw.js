@@ -1,18 +1,21 @@
-var DEFINE_CACHE = 'news-feed-v1.0',
-    RUNTIME_CACHE = 'news-feed-runtime-v1.0';
+   var version = 'v0.1',
+    DEFINE_CACHE = 'news-feed-'+version,
+    RUNTIME_CACHE = 'news-feed-runtime-'+version;
 
 var filesToCache = [
   '/',
   '/index.html',
   
-
-  '/scripts/support.js',
   '/scripts/ajax.js',
-  '/scripts/app.js',
+  '/scripts/libs/handlebars-v4.0.10.js',
+  '/scripts/libs/modernizr-custom.js',
   '/scripts/mvc/eventListener.js',
   '/scripts/mvc/model.js',
   '/scripts/mvc/view.js',
   '/scripts/mvc/controller.js',
+  '/scripts/allScripts.js',
+   '/scripts/app.js',
+   '/scripts/support.js',
 
 
   '/styles/reset.css',
@@ -33,70 +36,65 @@ var filesToCache = [
 ];
 
 self.addEventListener('install', function(event) {
-    console.log('[ServiceWorker] Install');
-  // Perform install steps
   event.waitUntil(
     caches.open(DEFINE_CACHE)
-      .then(function(cache ) {
-        //console.log('[ServiceWorker] Caching app shell');
+      .then(function(cache) {
         return cache.addAll(filesToCache);
+          console.log('[ServiceWorker] Installed');
       })
      .then(self.skipWaiting())
   );
 });
 
+var expectedCaches = [
+   DEFINE_CACHE, 
+   RUNTIME_CACHE
+  ];
+
 self.addEventListener('activate', function(event) {
-   var cacheWhitelist = [DEFINE_CACHE, RUNTIME_CACHE];
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.map(function(cacheName) {
           
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
+          if (expectedCaches.indexOf(cacheName) === -1) {
               console.log('deleted');
-           return caches.delete(cacheName);
+              return caches.delete(cacheName);
           }
         })
       );
     })
   );
-  return self.clients.claim();
+ return self.clients.claim();
 });
 
 self.addEventListener('fetch', function(event) {
-  
+   //  console.log(event.request);
     event.respondWith(
       caches.match(event.request).then(function(response) {
-
-            if(response){
-                return response;
-            }else{
-               return requestFromNetwork(event);
-            }
-            
-
+              return response || fetchAndCache(event)
          })
     );
 });
 
-function requestFromNetwork(event){
+function fetchAndCache(event){
     var url = event.request.clone();
   
-    return fetch(url).then(function(res){
-        //if not a valid response send the error
-        
-        if(!res || res.status !== 200){
-           
-            return res;
-        }
-        
-        var response = res.clone();
+    return fetch(url)
+    .then(function(response){
+      
+       var res = response.clone();
 
-        caches.open(RUNTIME_CACHE).then(function(cache){
-            cache.put(event.request, response);
+       caches.open( RUNTIME_CACHE).then(function(cache) {
+           cache.put(event.request.url, res);
         });
-   
-        return res;
+
+        return response;
+         
     })
+    .catch(function(error) {
+      console.log('Request failed:', error);
+   });
+
 }
 
