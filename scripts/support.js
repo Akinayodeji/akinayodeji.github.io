@@ -25,5 +25,13 @@
            });
     }
 
-    
+    //-------fallback------
+   flex = CSS.supports("display", "flex");
+   flexWrap = CSS.supports("flex-wrap", "wrap");
+    if(!flex || !flexWrap){
+
+        $eachElem(".flex", function(index, elem){
+            elem.classList.remove("flex");
+         });
+    }
 }())
