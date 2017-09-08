@@ -1,4 +1,4 @@
-   var version = 'v0.2',
+   var version = 'v0.5',
     DEFINE_CACHE = 'news-feed-'+version,
     RUNTIME_CACHE = 'news-feed-runtime-'+version;
 
@@ -72,7 +72,7 @@ self.addEventListener('fetch', function(event) {
    //  console.log(event.request);
     event.respondWith(
       caches.match(event.request).then(function(response) {
-              return response || fetchAndCache(event)
+              return response || fetch(event.request)
          })
     );
 });
