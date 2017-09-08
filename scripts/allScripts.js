@@ -111,6 +111,7 @@ function appModel() {
 var appView = function(model, elements) {
     this._model = model;
     this._elements = elements;
+    this.isLoading = true;
     this.sortBy = new EventListener();
     this.offlineNote = new EventListener();
     this.onlineNote = new EventListener();
@@ -146,19 +147,21 @@ var appView = function(model, elements) {
 }
 
 appView.prototype = {
-    show: function(){
-        this.showLoader();
-    },
     showLoader: function(){
-        document.querySelector(this._elements.loading).classList.remove("hidden");
-        document.querySelector(this._elements.temp).classList.add("hidden");
-        document.querySelector(this._elements.error).classList.add("hidden");
+        if(!this.isLoading){
+           document.querySelector(this._elements.loading).removeAttribute('hidden');
+           document.querySelector(this._elements.container).setAttribute('hidden', true);
+           document.querySelector(this._elements.error).setAttribute('hidden', true);
+           this.isLoading = true;
+        }
     },
     hideLoader: function(){
-      document.querySelector(this._elements.loading).classList.add("hidden");
-      document.querySelector(this._elements.temp).classList.remove("hidden");
-      document.querySelector(this._elements.heading).classList.remove("hidden");
-      document.querySelector(this._elements.error).classList.add("hidden");
+      if(this.isLoading){
+          document.querySelector(this._elements.loading).setAttribute('hidden', true);
+          document.querySelector(this._elements.container).removeAttribute('hidden');
+          document.querySelector(this._elements.error).setAttribute('hidden', true);
+          this.isLoading = false;
+        }
     },
     networkFeedback: function( color, msg ){
         var _this = this;
@@ -170,20 +173,24 @@ appView.prototype = {
            document.querySelector(_this._elements.networkMode).classList.remove("up");
         },2000);
     },
+    showError: function(){
+         document.querySelector(this._elements.error).removeAttribute('hidden');
+         document.querySelector(this._elements.container).setAttribute('hidden', true);
+         document.querySelector(this._elements.loading).setAttribute('hidden', true);
+         this.isLoading = false;
+         document.querySelector(this._elements.error).innerHTML = 
+        `<div class='error-msg'>
+              Couldn't retrieve data at this time.. check your network conection and try again 
+            </div>
+            `
+    },
     retrieveAndDisplay: function( feedback ){
+      
         if(feedback){
             this.displayData( feedback ) ;
             this.hideLoader();
         }else{
-            document.querySelector(this._elements.loading).classList.add("hidden");
-            document.querySelector(this._elements.error).classList.remove("hidden");
-            document.querySelector(this._elements.heading).classList.add("hidden");
-
-            document.querySelector(this._elements.error).innerHTML = 
-            `<div class='error-msg'>
-              Couldn't retrieve data at this time.. check your network conection and try again 
-            </div>
-            `
+           this.showError();
         }
     },
     
@@ -209,19 +216,19 @@ var appController = function(model, view){
     _this = this;
    
      this.checkNetWork = navigator.onLine;
-     window.addEventListener('load', function() {  
-        _this.getData(_this.checkNetWork, "undefined");
-        
+      //LOAD DATA
+     _this.getData(_this.checkNetWork, "undefined");
+
+     window.addEventListener('load', function() {      
         if(_this.checkNetWork ){
             _this.view.onlineNote.notify();
-           // _this.getData(_this.checkNetWork, "undefined");
         }else{
            _this.view.offlineNote.notify();
-           //_this.getData(_this.checkNetWork, "undefined");   
         }
-
      });
 
+
+     //SORTBY
      this.view.sortBy.attach(function( sender ,args ){
          _this.getData(_this.checkNetWork, args );
      });
@@ -246,30 +253,30 @@ appController.prototype = {
              "networkMode":".network-mode",
              "scriptTemplate":"#scriptTemplate",
              "error":".error-container",
+             "container":".main-container",
              "select":".select",
              "heading":".heading"
          }),
          
          controller = new appController(model, view);
-    
-        window.addEventListener("load", function(){
-            view.show(); 
-        });
-     
+
     /*
        @service workers
        check and register for it ....
     */
     
     if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-                .then(function(registration) {
-                alert('ServiceWorker registration successful with scope: ', registration.scope);
+       
+            navigator.serviceWorker.register('./sw.js').then(function(registration) {
+            // Registration was successful
+           // console.log('ServiceWorker registration successful with scope: ', registration.scope);
             }, function(err) {
-                 alert('ServiceWorker registration failed: ', err);
+            // registration failed :(
+           // console.log('ServiceWorker registration failed: ', err);
             });
+       
    }else{
-        alert("Service worker not supported")
+        console.log("Service worker not supported")
     }
     
     /*
