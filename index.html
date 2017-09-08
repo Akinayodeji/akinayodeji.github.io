@@ -41,42 +41,23 @@
     </header>
     <main class="container app-shell">
         <div class="app-shell-inner shell">
-         <h3 class="heading"></h3>
-         <div class="template flex flex--wrap">
-             
-           </div>
-         <div class="error-container"></div>
+         <div class="main-container" hidden>
+            <h3 class="heading"></h3>
+            <div class="template flex flex--wrap"> </div>
+         </div>
+         <div class="error-container" hidden></div>
          <!-- loader container -->
-         <div class="loading hidden">
-            <div class="flex flex--wrap">
-                <div class="col-ms-50  loading-wrapper ">
-                    <span class="loading-0"></span>
-                    <span class="loading-1"></span>
-                    <span class="loading-2"></span>
-                    <span class="loading-3"></span>
-                </div>
-                <div class="col-ms-50  loading-wrapper ">
-                    <span class="loading-0"></span>
-                    <span class="loading-1"></span>
-                    <span class="loading-2"></span>
-                    <span class="loading-3"></span>
-                </div>
-                <div class="col-ms-50  loading-wrapper ">
-                    <span class="loading-0"></span>
-                    <span class="loading-1"></span>
-                    <span class="loading-2"></span>
-                    <span class="loading-3"></span>
-                </div>
-                <div class="col-ms-50  loading-wrapper ">
-                    <span class="loading-0"></span>
-                    <span class="loading-1"></span>
-                    <span class="loading-2"></span>
-                    <span class="loading-3"></span>
-                </div>
-                </div>
-            </div>
+         <div class="loading">
+           <div class="spinner-container">
+                <div class="spinner ">
+                    <svg viewBox="0 0 32 32" width="32" height="32">
+                      <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+                    </svg>
+                </div>         
+         </div>
         </div>
-        <div class="network-mode hidden"></div>
+        
+        <div class="network-mode"></div>
     </main>
     <footer class="footer">
        <p>Made with <i class="ion-heart note-001"></i> by dejavu @techatrek</p>
@@ -89,7 +70,7 @@
           {{#each articles}}
                 <div class="col-ms-50 ">
                     <div class="card news-card">
-                        <a class="news-href " target="_blank" href="{{url}}"  rel="noopener">
+                        <a class="news-href " target="_blank" href="{{url}}" rel="noopener">
                             <div class="news-img-container">
                                 <img src="{{urlToImage}}" alt="{{urlToImage}}"></img>
                             </div>
@@ -108,7 +89,7 @@
      <script src="scripts/ajax.js" async></script>
      <script src="scripts/libs/handlebars-v4.0.10.js"></script>
      <script src="scripts/libs/modernizr-custom.js" async></script>
-    <script src="scripts/allScripts.js" async></script>
+     <script src="scripts/allScripts.js" async></script>
      <script src="scripts/support.js" async></script>
     
 </body>
