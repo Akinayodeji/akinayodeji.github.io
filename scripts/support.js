@@ -12,5 +12,18 @@
 
      }
    }
-   
+   ///--------
+  
+    var el = document.createElement("div").style;
+    if(('flexWrap' in el) || ('WebkitFlexWrap' in el) || ('msFlexWrap' in el)){
+          $eachElem(".flex", function(index, elem){
+               elem.classList.add("flex");
+           });
+    }else{
+          $eachElem(".flex", function(index, elem){
+               elem.classList.remove("flex");
+           });
+    }
+
+    
 }())
