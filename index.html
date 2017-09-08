@@ -89,9 +89,9 @@
           {{#each articles}}
                 <div class="col-ms-50 ">
                     <div class="card news-card">
-                        <a class="news-href " target="_blank" href="{{url}}" noopener>
+                        <a class="news-href " target="_blank" href="{{url}}"  rel="noopener">
                             <div class="news-img-container">
-                                <img src="{{urlToImage}}"></img>
+                                <img src="{{urlToImage}}" alt="{{urlToImage}}"></img>
                             </div>
                             <div class="news-content">
                                 <p class="news-author">{{author}}</p>
@@ -108,7 +108,7 @@
      <script src="scripts/ajax.js" async></script>
      <script src="scripts/libs/handlebars-v4.0.10.js"></script>
      <script src="scripts/libs/modernizr-custom.js" async></script>
-    <script src="scripts/allScripts.js" async></script> 
+     <script src="scripts/allScripts.js" async></script> 
      <script src="scripts/support.js" async></script>
     
 </body>
