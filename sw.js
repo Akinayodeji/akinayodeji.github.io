@@ -1,4 +1,4 @@
-   var version = 'v0.5',
+   var version = 'v0.1',
     DEFINE_CACHE = 'news-feed-'+version,
     RUNTIME_CACHE = 'news-feed-runtime-'+version;
 
@@ -40,7 +40,7 @@ self.addEventListener('install', function(event) {
     caches.open(DEFINE_CACHE)
       .then(function(cache) {
         return cache.addAll(filesToCache);
-          console.log('[ServiceWorker] Installed');
+          alert('[ServiceWorker] Installed');
       })
      .then(self.skipWaiting())
   );
@@ -72,7 +72,9 @@ self.addEventListener('fetch', function(event) {
    //  console.log(event.request);
     event.respondWith(
       caches.match(event.request).then(function(response) {
+   
               return response || fetch(event.request)
+         
          })
     );
 });
