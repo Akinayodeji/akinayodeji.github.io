@@ -34,4 +34,15 @@
             elem.classList.remove("flex");
          });
     }
+  //
+
+  if('fixed' in el || "transform" in el){
+      $eachElem(".network-mode", function(index, elem){
+        elem.removeAttribute("hidden");
+      });
+  }else{
+      $eachElem(".network-mode", function(index, elem){
+         elem.setAttribute("hidden", true);
+      });
+  }
 }())
