@@ -264,11 +264,12 @@ appController.prototype = {
     if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js')
                 .then(function(registration) {
+                alert('ServiceWorker registration successful with scope: ', registration.scope);
             }, function(err) {
-                 alert("oops..")
+                 alert('ServiceWorker registration failed: ', err);
             });
    }else{
-        console.log("Service worker not supported")
+        alert("Service worker not supported")
     }
     
     /*
