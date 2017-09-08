@@ -70,9 +70,7 @@ self.addEventListener('fetch', function(event) {
    //  console.log(event.request);
     event.respondWith(
       caches.match(event.request).then(function(response) {
-   
               return response || fetchAndCache(event)
-         
          })
     );
 });
@@ -97,4 +95,8 @@ function fetchAndCache(event){
    });
 
 }
-
+self.addEventListener('message', function(event) {
+  if (event.data == 'skipWaiting') {
+    self.skipWaiting();
+  }
+});
