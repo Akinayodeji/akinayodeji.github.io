@@ -1,4 +1,4 @@
-   var version = 'v0.1',
+   var version = 'v0.1.0.0',
     DEFINE_CACHE = 'news-feed-'+version,
     RUNTIME_CACHE = 'news-feed-runtime-'+version;
 
