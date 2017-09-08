@@ -40,9 +40,7 @@ self.addEventListener('install', function(event) {
     caches.open(DEFINE_CACHE)
       .then(function(cache) {
         return cache.addAll(filesToCache);
-          alert('[ServiceWorker] Installed');
       })
-     .then(self.skipWaiting())
   );
 });
 
@@ -73,7 +71,7 @@ self.addEventListener('fetch', function(event) {
     event.respondWith(
       caches.match(event.request).then(function(response) {
    
-              return response || fetch(event.request)
+              return response || fetchAndCache(event)
          
          })
     );
