@@ -1,4 +1,5 @@
 (function(){
+   alert("hey javascript");
    var $el = function( selector ){
        return document.querySelector( selector );
    }
@@ -37,12 +38,12 @@
   //
 
   if('fixed' in el || "transform" in el){
-      alert("supported");
+     // alert("supported");
       $eachElem(".network-mode", function(index, elem){
         elem.removeAttribute("hidden");
       });
   }else{
-     alert("not supported");
+   //  alert("not supported");
       $eachElem(".network-mode", function(index, elem){
          elem.setAttribute("hidden", true);
       });
