@@ -43,10 +43,10 @@
   //
 
   if('fixed' in el || "transform" in el){
-     alert("fixed || transform");
+     //alert("fixed || transform");
      $el(".network-mode").style.display = "none";
   }else{
-     alert("no-fixed || no-transform");
+     //alert("no-fixed || no-transform");
    $el(".network-mode").style.display = "";
   }
 }())
