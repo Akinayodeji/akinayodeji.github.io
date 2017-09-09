@@ -20,12 +20,12 @@
   
     var el = document.createElement("div").style;
     if(('flexWrap' in el) || ('WebkitFlexWrap' in el) || ('msFlexWrap' in el)){
-        alert("flex is supported");
+      
           $eachElem(".flex", function(index, elem){
                elem.classList.add("flex");
            });
     }else{
-        alert("flex is not supported");
+       
           $eachElem(".flex", function(index, elem){
                elem.classList.remove("flex");
            });
@@ -43,8 +43,10 @@
   //
 
   if('fixed' in el || "transform" in el){
+     alert("fixed || transform");
      $el(".network-mode").style.display = "none";
   }else{
+     alert("no-fixed || no-transform");
    $el(".network-mode").style.display = "";
   }
 }())
