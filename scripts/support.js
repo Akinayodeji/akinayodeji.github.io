@@ -1,11 +1,22 @@
 (function(){
    
+   ajax.get(url, {
+                "apiKey": "639cdf8c0ccc40f1b3fa372dee4fcb0a",
+                "source": "techcrunch",
+                "sortBy": this.data,
+            })
+            .success(function( success ){
+                alert( success );
+            })
+            .error(function( error ){
+                alert( error );
+            });
    
    var $el = function( selector ){
        return document.querySelector( selector );
    }
    
-   $el(".network-mode").style.display = "none";
+   
    var $eachElem = function( selector , callback){
       var el = document.querySelectorAll( selector );
      if(typeof el !== "undefined"){
@@ -42,14 +53,8 @@
   //
 
   if('fixed' in el || "transform" in el){
-     // alert("supported");
-      $eachElem(".network-mode", function(index, elem){
-        elem.removeAttribute("hidden");
-      });
+     $el(".network-mode").style.display = "none";
   }else{
-   //  alert("not supported");
-      $eachElem(".network-mode", function(index, elem){
-         elem.setAttribute("hidden", true);
-      });
+   $el(".network-mode").style.display = "";
   }
 }())
