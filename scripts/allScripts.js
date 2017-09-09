@@ -238,6 +238,7 @@ var appController = function(model, view){
 appController.prototype = {
 
     getData: function (status, args) {
+        alert("getting data");
         this.model.getNewData( status, args);
     }
 }
