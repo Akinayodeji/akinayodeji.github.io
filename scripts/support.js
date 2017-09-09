@@ -1,4 +1,5 @@
 (function(){
+   
    ajax.get(url, {
                 "apiKey": "639cdf8c0ccc40f1b3fa372dee4fcb0a",
                 "source": "techcrunch",
@@ -24,6 +25,10 @@
 
      }
    }
+   
+    $eachElem(".network-mode", function(index, elem){
+         elem.setAttribute("hidden", true);
+      });
    ///--------
   
     var el = document.createElement("div").style;
