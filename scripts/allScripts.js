@@ -217,7 +217,7 @@ var appController = function(model, view){
    
      this.checkNetWork = navigator.onLine;
       //LOAD DATA
-     _this.getData(_this.checkNetWork, "undefined");
+    // _this.getData(_this.checkNetWork, "undefined");
 
      window.addEventListener('load', function() {      
         if(_this.checkNetWork ){
@@ -260,7 +260,7 @@ appController.prototype = {
          }),
          
          controller = new appController(model, view);
-
+         controller.getData(true, "undefined");
     /*
        @service workers
        check and register for it ....
