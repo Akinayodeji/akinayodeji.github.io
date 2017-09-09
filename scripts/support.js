@@ -29,7 +29,7 @@
    flex = CSS.supports("display", "flex");
    flexWrap = CSS.supports("flex-wrap", "wrap");
     if(!flex || !flexWrap){
-
+       
         $eachElem(".flex", function(index, elem){
             elem.classList.remove("flex");
          });
@@ -37,10 +37,12 @@
   //
 
   if('fixed' in el || "transform" in el){
+      alert("supported");
       $eachElem(".network-mode", function(index, elem){
         elem.removeAttribute("hidden");
       });
   }else{
+     alert("not supported");
       $eachElem(".network-mode", function(index, elem){
          elem.setAttribute("hidden", true);
       });
