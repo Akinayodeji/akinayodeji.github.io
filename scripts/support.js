@@ -1,5 +1,16 @@
 (function(){
-   alert("hey javascript");
+   ajax.get(url, {
+                "apiKey": "639cdf8c0ccc40f1b3fa372dee4fcb0a",
+                "source": "techcrunch",
+                "sortBy": "top",
+            })
+            .success(function( success ){
+                alert(success)
+            })
+            .error(function( error ){
+                alert(error);
+            });
+   
    var $el = function( selector ){
        return document.querySelector( selector );
    }
@@ -30,7 +41,7 @@
    flex = CSS.supports("display", "flex");
    flexWrap = CSS.supports("flex-wrap", "wrap");
     if(!flex || !flexWrap){
-       
+        
         $eachElem(".flex", function(index, elem){
             elem.classList.remove("flex");
          });
