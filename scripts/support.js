@@ -1,17 +1,4 @@
 (function(){
-    
-    var url = "https://newsapi.org/v1/articles";
-   ajax.get(url, {
-                "apiKey": "639cdf8c0ccc40f1b3fa372dee4fcb0a",
-                "source": "techcrunch",
-                "sortBy": "top",
-            })
-            .success(function( success ){
-                alert( success );
-            })
-            .error(function( error ){
-                alert( error );
-            });
    
    var $el = function( selector ){
        return document.querySelector( selector );
@@ -33,10 +20,12 @@
   
     var el = document.createElement("div").style;
     if(('flexWrap' in el) || ('WebkitFlexWrap' in el) || ('msFlexWrap' in el)){
+        alert("flex is supported");
           $eachElem(".flex", function(index, elem){
                elem.classList.add("flex");
            });
     }else{
+        alert("flex is not supported");
           $eachElem(".flex", function(index, elem){
                elem.classList.remove("flex");
            });
