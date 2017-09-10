@@ -41,8 +41,8 @@
          });
     }
   //
-
-  if("transform" in el){
+  t = CSS.supports("transform", "translate");
+  if(t){
      alert("transform");
      $el(".network-mode").style.display = "none";
   }else{
