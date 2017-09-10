@@ -360,7 +360,8 @@ body{
     top:4px;
     color:#f50057
 }
-.network-mode{
+@supports ( transform: translateY(200px)){
+	.network-mode{
    background: #000;
    color:#fff;
    width:170px;
@@ -381,6 +382,8 @@ body{
    z-index: 99;
    left:10px;
 }
+}
+
 
 .up{
     transform: translateY(0);
