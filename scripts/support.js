@@ -43,10 +43,10 @@
   //
 
   if("transform" in el){
-     alert("|| transform");
+     alert("transform");
      $el(".network-mode").style.display = "none";
   }else{
-     alert(|| no-transform");
+     alert("no-transform");
     $el(".network-mode").style.display = "";
   }
 }())
